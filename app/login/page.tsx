@@ -1,39 +1,69 @@
-import React from 'react';
-import { Input } from '@nextui-org/react';
-import { MdEmail, MdLock } from 'react-icons/md';
-import Link from 'next/link'; // Import Link from next/link
+// pages/index.js
+import React, { useState } from "react";
+import Image from "next/image";
+import styles from "./SignInForm.module.css"
 
 export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = function (e: { preventDefault: () => void; }) {
+    e.preventDefault();
+    // Add authentication logic here
+    console.log("Login form submitted", { email, password });
+  };
+
   return (
-    <div className="flex flex-col gap-4">
-      <h1>Login Page</h1>
-      
-      {/* Email Input */}
-      <Input
-        type="email"
-        label="Email"
-        placeholder="you@example.com"
-        labelPlacement="outside"
-        startContent={<MdEmail className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />}
-      />
-
-      {/* Password Input */}
-      <Input
-        type="password"
-        label="Password"
-        placeholder="Enter your password"
-        labelPlacement="outside"
-        startContent={<MdLock className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />}
-      />
-
-      {/* Navigation Button */}
-      <div>
-        {/* Use Link to navigate to the home page */}
-        <Link href="/">
-          <button className="bg-blue-500 text-white px-4 py-2 rounded-md">
-            Go to Home Page
-          </button>
-        </Link>
+    <div className={styles.container}>
+      <div className={styles.left}>
+        <div className={styles.welcomeText}>
+          <h2>Welcome to FitTrack</h2>
+          <p>Your journey to a healthier life starts here.</p>
+        </div>
+      </div>
+      <div className={styles.right}>
+        <div className={styles.loginForm}>
+          <h2>Sign in to account</h2>
+          <p>Your journey to a healthier life starts here.</p>
+          <form onSubmit={handleSubmit}>
+            <div className={styles.inputGroup}>
+              <input
+                type="email"
+                placeholder="Enter email address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div className={styles.inputGroup}>
+              <input
+                type="password"
+                placeholder="Create Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            <a href="#" className={styles.forgotPassword}>
+              Forgot password?
+            </a>
+            <button type="submit" className={styles.signInButton}>
+              Sign in
+            </button>
+          </form>
+          <div className={styles.socialLogin}>
+            <p>Or sign in with</p>
+            <div className={styles.socialIcons}>
+              <a href="#"><img src="\images\icon-facebook.png" alt="Facebook" /></a>
+              <a href="#"><img src="\images\icon-google.png" alt="Google" /></a>
+              <a href="#"><img src="\images\icon-apple.png" alt="Instagram" /></a>
+            </div>
+          </div>
+          <div className={styles.signUpPrompt}>
+            <p>Don't have an account yet?</p>
+            <button className={styles.signUpButton}>Sign Up</button>
+          </div>
+        </div>
       </div>
     </div>
   );

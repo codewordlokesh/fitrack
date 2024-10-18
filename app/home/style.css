@@ -1,0 +1,39 @@
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2a9d8f;
+  }
+  
+  .nav-link {
+    color: #000;
+    font-weight: 500;
+  }
+  
+  .user-icon {
+    font-size: 24px;
+  }
+  
+  .card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .calories-info {
+    text-align: center;
+  }
+  
+  .diet-list {
+    background-color: #f5f5f5;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .diet-list h6 {
+    color: #e76f51;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
