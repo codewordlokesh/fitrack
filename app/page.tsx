@@ -8,17 +8,20 @@
 // import { GithubIcon } from "@/components/icons";
 "use client";
 import Image from "next/image";
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
 import { Tabs, Tab } from "@nextui-org/react";
-import { Container, Row, Col, Card, Button } from "react-bootstrap";
-import './home/style.css';
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("Home");
+  const router = useRouter();
 
   // Handler function for onClick
   const handleTabClick = (tabKey: string) => {
     setActiveTab(tabKey);
+  };
+  function nav_login() {
+    router.push('/login')
   };
 
   return (
@@ -42,7 +45,7 @@ export default function Home() {
                 <img
                   src="/images/logo1.png"
                   alt="Home"
-                  className="w-5 h-5 flex justify-center"
+                  className="w-6 h-6 flex justify-center"
                 />{" "}
                 Home
               </>
@@ -89,6 +92,7 @@ export default function Home() {
           alt="User Icon"
           width={48}
           height={48}
+        onClick={nav_login}
         />
       </div>
     </>
