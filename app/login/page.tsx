@@ -1,68 +1,100 @@
 "use client";
+
+import { useState } from "react";
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
 import { useRouter } from "next/navigation";
 
 export default function Login() {
   const router = useRouter();
+  
+  // State variables
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false); // For password visibility
+
+  // Default credentials
+  const defaultEmail = "lokeshgunasekaran523@gmail.com";
+  const defaultPassword = "password@25";
+
+  // Toggle password visibility
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
+
+  // Login validation function
+  const handleLogin = () => {
+    if (email === defaultEmail && password === defaultPassword) {
+      alert("Login successful!"); 
+      router.push('/home');
+    } else {
+      setError("Incorrect email or password. Please try again.");
+    }
+  };
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-white">
       {/* Main Container */}
-      <div className="flex flex-row w-full max-w-screen-lg bg-white">
+      <div className="flex flex-row w-full bg-white">
         {/* Left Side - Image */}
-        <div className="hidden md:flex w-1/2 bg-white">
-          <img src="/images/login_img.png" alt="Login Image" className="w-full h-full object-cover -ml-10" />
+        <div className="h-screen bg-white">
+          <img src="/images/login_img.png" alt="Login Image" className="w-100 h-screen p-5" />
         </div>
+
         {/* Right Side - Login Form */}
-        <div className="flex flex-col items-center justify-center w-full md:w-1/2 p-10 space-y-6">
+        <div className="flex flex-col items-center justify-center w-full md:w-1/2 space-y-6">
           {/* Logo and Title */}
           <div className="flex items-center space-x-3">
-            <img
-              src="/images/logo.png"
-              alt="Sample Image"
-              width={50}
-              height={44}
-            />
-            <div className="text-black font-extrabold text-3xl">
-              FITRACK
-            </div>
+            <img src="/images/logo.png" alt="Sample Image" width={50} height={44} />
+            <div className="text-black font-extrabold text-3xl">FITRACK</div>
           </div>
+
           {/* Login Form */}
           <div className="w-full max-w-sm">
-            <h2 className="text-black font-bold text-lg mb-2 text-center">
-              Sign in to your account
-            </h2>
+            <h2 className="text-black font-bold text-lg mb-2 text-center">Sign in to your account</h2>
             <h3 className="text-black font-normal text-sm mb-6 text-center">
               Your journey to a healthier life starts here.
             </h3>
+
             {/* Input Fields */}
             <div className="space-y-4">
-              <Input
-                type="text"
-                label="Name"
-                placeholder="Enter your name"
-                className="w-full"
-              />
               <Input
                 type="email"
                 label="Email"
                 placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-full"
               />
-              <Input
-                type="password"
-                label="Password"
-                placeholder="Create password"
-                className="w-full"
-              />
+              <div className="relative">
+                <Input
+                  type={isPasswordVisible ? "text" : "password"}
+                  label="Password"
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full"
+                />
+                <button
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  className="absolute inset-y-0 right-3 flex items-center text-gray-500"
+                >
+                  {isPasswordVisible ? "Hide" : "Show"}
+                </button>
+              </div>
             </div>
-            {/* Button and Links */}
+
+            {/* Button and Error Message */}
             <div className="text-center mt-4">
               <p className="text-sm pb-5 underline text-orange-600 hover:text-black cursor-pointer">
                 Forgot password?
               </p>
-              <Button color="success" className="w-full">Create account</Button>
+              <Button color="success" className="w-full" onClick={() => router.push('/Home')}>Sign In</Button>
+              {error && <p className="text-red-500 mt-2">{error}</p>}
             </div>
+
             {/* Social Sign-In Options */}
             <div className="flex flex-col items-center mt-6 space-y-4">
               <p className="text-gray-700">Or sign in with</p>
@@ -92,9 +124,10 @@ export default function Login() {
                   </svg>
                 </button>
               </div>
+
               {/* Sign Up Link */}
               <p className="text-gray-700 mt-4">Don't have an account yet?</p>
-              <Button color="success" className="w-full" onClick={() => router.push('/signup')}>Sign up</Button>
+              <Button color="success" className="w-full" onClick={(handleLogin)}>Sign Up</Button>
             </div>
           </div>
         </div>
