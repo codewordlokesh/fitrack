@@ -4,7 +4,7 @@ import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
 import { useRouter } from "next/navigation";
 
-export default function Login() {
+export default function signUp() {
   const router = useRouter();
 
   return (

@@ -27,7 +27,7 @@ export default function Login() {
   const handleLogin = () => {
     if (email === defaultEmail && password === defaultPassword) {
       alert("Login successful!"); 
-      router.push('/home');
+      router.push('/password');
     } else {
       setError("Incorrect email or password. Please try again.");
     }
@@ -91,7 +91,7 @@ export default function Login() {
               <p className="text-sm pb-5 underline text-orange-600 hover:text-black cursor-pointer">
                 Forgot password?
               </p>
-              <Button color="success" className="w-full" onClick={() => router.push('/Home')}>Sign In</Button>
+              <Button color="success" className="w-full" onClick={handleLogin}>Sign In</Button>
               {error && <p className="text-red-500 mt-2">{error}</p>}
             </div>
 
@@ -127,7 +127,7 @@ export default function Login() {
 
               {/* Sign Up Link */}
               <p className="text-gray-700 mt-4">Don't have an account yet?</p>
-              <Button color="success" className="w-full" onClick={(handleLogin)}>Sign Up</Button>
+              <Button color="success" className="w-full" onClick={() => router.push('/signup')}>Sign Up</Button>
             </div>
           </div>
         </div>

@@ -13,6 +13,7 @@ import { Tabs, Tab } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
+  
   const [activeTab, setActiveTab] = useState("Home");
   const router = useRouter();
 
@@ -26,6 +27,7 @@ export default function Home() {
   }
 
   return (
+
     <div className="bg-[#D9E8D9] flex justify-between p-3">
       <div className="flex items-center ml-4">
         <Image
@@ -36,8 +38,7 @@ export default function Home() {
         />
         <div className="text-black font-extrabold">{"FITRACK"}</div>
       </div>
-
-      <Tabs variant={"underlined"} aria-label="Tabs variants">
+      <Tabs className="flex space-x-6" variant={"underlined"} aria-label="Tabs variants">
         <Tab
           key="Home"
           title={
@@ -140,4 +141,4 @@ export default function Home() {
     //   </div>
     // </section>
     );
-}
+} 
