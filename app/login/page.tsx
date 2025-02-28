@@ -16,7 +16,7 @@ export default function Login() {
 
   // Default credentials
   const defaultEmail = "lokeshgunasekaran523@gmail.com";
-  const defaultPassword = "password@25";
+  const defaultPassword = "password@2509";
 
   // Toggle password visibility
   const togglePasswordVisibility = () => {

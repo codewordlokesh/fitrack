@@ -4,7 +4,7 @@ import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
 import { useRouter } from "next/navigation";
 import { Avatar } from "@nextui-org/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function OTP() {
   const router = useRouter();
@@ -14,6 +14,9 @@ export default function OTP() {
 
   // Expected OTP for verification
   const expectedOtp = ["1", "2", "3", "4"];
+
+  // Timer state (in seconds)
+  const [timer, setTimer] = useState(60);
 
   // Handler to update OTP values
   const handleChange = (value: string, index: number) => {
@@ -25,11 +28,26 @@ export default function OTP() {
   // Verify OTP
   const verifyOtp = () => {
     if (otp.join("") === expectedOtp.join("")) {
-      router.push("/home"); // Redirect on successful verification
+      router.push("/personal_info"); // Redirect on successful verification
     } else {
       alert("Invalid OTP. Please try again.");
     }
   };
+
+  // Start the timer when the page is loaded
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTimer((prev) => {
+        if (prev === 1) {
+          clearInterval(interval); // Clear the interval when the timer reaches 0
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000); // Update every second
+
+    return () => clearInterval(interval); // Cleanup on component unmount
+  }, []);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-white">
@@ -69,7 +87,18 @@ export default function OTP() {
             ))}
           </div>
 
-          <Button onClick={verifyOtp} size="lg" className="w-80">
+          {/* Timer */}
+          <div className="mb-4 text-center text-sm text-gray-500">
+            Time remaining: {timer} seconds
+          </div>
+
+          {/* OTP Verification Button */}
+          <Button 
+            onClick={verifyOtp} 
+            size="lg" 
+            className="w-80" 
+            disabled={timer === 0} // Disable button when timer reaches 0
+          >
             Verify OTP
           </Button>
         </div>

@@ -11,6 +11,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { Tabs, Tab } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
+import React from "react";
 
 export default function Home() {
   
@@ -27,7 +28,6 @@ export default function Home() {
   }
 
   return (
-
     <div className="bg-[#D9E8D9] flex justify-between p-3">
       <div className="flex items-center ml-4">
         <Image
@@ -87,7 +87,6 @@ export default function Home() {
           }
         />
       </Tabs>
-
       <Image
         src="/images/user_icon.png"
         className="mr-4"
